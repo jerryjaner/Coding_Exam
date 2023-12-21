@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -88,7 +89,7 @@ class ProductController extends Controller
                 <td>' . $data->name . '</td>
                 <td>' . $data->unit . '</td>
                 <td>' . $data->price . '</td>
-                <td>' . $data->expiration_date . '</td>
+                <td>' . Carbon::parse($data->expiration_date)->format('F d, Y') . '</td>
                 <td>' . $data->available_inventory. '</td>
                 <td>
                   <a href="#" id="' . $data->id . '" class="text-primary mx-1 view_product" data-bs-toggle="modal" data-bs-target="#ViewModal" style="text-decoration:none;" title="View Product"><i class="bi bi-eye h4"></i>
