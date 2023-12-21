@@ -69,7 +69,7 @@ class ProductController extends Controller
 			$output .= '<table class="table table-striped table-sm text-center align-middle">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>#</th>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Unit</th>
@@ -80,9 +80,10 @@ class ProductController extends Controller
               </tr>
             </thead>
             <tbody>';
+            $i = 1;
 			foreach ($allproduct as $data) {
 				$output .= '<tr>
-                <td>' . $data->id . '</td>
+                <td>' . $i++. '</td>
                 <td><img src="storage/product/images/' . $data->image . '" width="100" "></td>
                 <td>' . $data->name . '</td>
                 <td>' . $data->unit . '</td>
