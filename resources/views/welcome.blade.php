@@ -8,13 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coding Test Crud AJAX</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css' />
-  <link rel='stylesheet'
-    href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css' />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.css" />
-
 </head>
-
-
 
 <!-- Add Modal -->
 <div class="modal fade" id="add_product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -75,11 +71,11 @@
   </div>
 </div>
 
-<body class="bg-light">
+<body>
   <div class="container">
     <div class="row my-5">
       <div class="col-lg-12">
-        <div class="card shadow">
+        <div class="card">
           <div class="card-header  d-flex justify-content-between align-items-center">
             <h3 class="text-secondary">Manage Product</h3>
               <!-- Button trigger modal -->
@@ -88,7 +84,7 @@
             </button>
           </div>
           <div class="card-body" id="show_all_product">
-            {{-- For the table  --}}
+            {{-- The table will render here  --}}
           </div>
         </div>
       </div>
