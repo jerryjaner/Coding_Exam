@@ -91,12 +91,12 @@ class ProductController extends Controller
                 <td>' . $data->expiration_date . '</td>
                 <td>' . $data->available_inventory. '</td>
                 <td>
-                  <a href="#" id="' . $data->id . '" class="text-primary mx-1 view_product" data-bs-toggle="modal" data-bs-target="#ViewModal" style="text-decoration:none;"><i class="bi bi-eye h4"></i>
+                  <a href="#" id="' . $data->id . '" class="text-primary mx-1 view_product" data-bs-toggle="modal" data-bs-target="#ViewModal" style="text-decoration:none;" title="View Product"><i class="bi bi-eye h4"></i>
                   </a>
 
-                  <a href="#" id="' . $data->id . '" class="text-success mx-1 edit_product" data-bs-toggle="modal" data-bs-target="#EditModal"><i class="bi-pencil-square h4"></i></a>
+                  <a href="#" id="' . $data->id . '" class="text-success mx-1 edit_product" data-bs-toggle="modal" data-bs-target="#EditModal" title="Edit Product"><i class="bi-pencil-square h4"></i></a>
 
-                  <a href="#" id="' . $data->id . '" class="text-danger mx-1 delete_product"><i class="bi-trash h4"></i></a>
+                  <a href="#" id="' . $data->id . '" class="text-danger mx-1 delete_product"><i class="bi-trash h4" title="Delete Product"></i></a>
 
                 </td>
               </tr>';
