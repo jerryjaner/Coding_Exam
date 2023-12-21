@@ -23,3 +23,4 @@ Route::get('/get-allproduct', [ProductController::class, 'fetch_all'])->name('ge
 Route::get('/edit-product', [ProductController::class, 'edit_product'])->name('edit_product');
 Route::post('/update-product', [ProductController::class, 'update_product'])->name('update_product');
 Route::delete('/delete', [ProductController::class, 'delete_product'])->name('delete');
+Route::get('/view-product', [ProductController::class, 'view_product'])->name('view_product');

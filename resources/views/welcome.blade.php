@@ -100,7 +100,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Create Product</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Edit Product</h5>
         {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close_edit_modal"></button> --}}
       </div>
      
@@ -160,6 +160,68 @@
   </div>
 </div>
 
+{{-- VIEW --}}
+<div class="modal fade" id="ViewModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">View Product</h5>
+      </div>
+     
+      <form  id="view_product" enctype="multipart/form-data">
+          <input  hidden name="id" id="view_product_id">
+        @csrf
+        <div class="modal-body">
+          <div class="my-2">
+            <label for="">Product Name</label>
+            <input type="text" name="name" id="view_name" class="form-control" placeholder="" readonly>
+            <span class="text-danger error-text name_error"></span>
+          </div>
+
+          <div class="my-2">
+            <label for="">Product Unit</label>
+            <input type="text" name="unit" id="view_unit"  class="form-control" placeholder="" readonly>
+            <span class="text-danger error-text unit_error"></span>
+          </div>
+
+          <div class="my-2">
+            <label for="">Product Price</label>
+            <input type="number" step="any" id="view_price"  name="price" class="form-control" placeholder="" readonly>
+            <span class="text-danger error-text price_error"></span>
+          </div>
+
+          <div class="my-2">
+            <label for="">Expiration Date</label>
+            <input type="date" name="expiration_date" id="view_expiration_date"  class="form-control" placeholder="" readonly>
+            <span class="text-danger error-text expiration_date_error"></span>
+          </div>
+
+          <div class="my-2">
+            <label for="">Available Inventory</label>
+            <input type="number" name="available_inventory" id="view_available_inventory"  class="form-control" placeholder="" readonly>
+            <span class="text-danger error-text available_inventory_error"></span>
+          </div>
+
+          <div class="my-2">
+            <label for="">Available Inventory Cost</label>
+            <input type="number"  id="view_available_inventory_cost"  class="form-control" placeholder="" readonly>
+          </div>
+
+          
+
+          <div class="mt-2" id="view_image">
+            
+          </div> 
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close_edit_modal">Close</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
@@ -334,50 +396,84 @@
       });
 
       $(document).on('click', '.delete_product', function(e) {
-              e.preventDefault();
-              let id = $(this).attr('id');
-              let csrf = '{{ csrf_token() }}';
-              var reader = new FileReader();
-              Swal.fire({
-                  title: 'Are you sure?',
-                  text: "All the records of this product will be permanently deleted!",
-                  icon: 'warning',
-                  // iconColor: 'rgb(188 61 79)',
-                  showCancelButton: true,
-                  confirmButtonColor: '#bc3d4f',
-                  confirmButtonText: 'Confirm delete!',
-                  confirmButtonColor: '#bc3d4f',
-              })
-              .then((result) => {
-                  if (result.isConfirmed) {
-                      $.ajax({
-                          url: '{{ route('delete') }}',
-                          method: 'delete',
-                          data: {
-                              id: id,
-                              _token: csrf
-                          },
-                          success: function(response) {
-                              console.log(response);
-                              allproduct();
-                              Swal.fire({
-                                  icon: 'success',
-                                  title: 'Deleted Successfully.',
-                                  showConfirmButton: false,
-                                  timer: 1700,
-                                  // timerProgressBar: true,
-                                  // toast: true,
-                                  // position: 'top',
-                                  // iconColor: 'white',
-                                  // customClass: {
-                                  //     popup: 'colored-toast'
-                                  // },
-                              })
-                          }
-                      });
-                  }
-              })
+          e.preventDefault();
+          let id = $(this).attr('id');
+          let csrf = '{{ csrf_token() }}';
+          var reader = new FileReader();
+          Swal.fire({
+              title: 'Are you sure?',
+              text: "All the records of this product will be permanently deleted!",
+              icon: 'warning',
+              // iconColor: 'rgb(188 61 79)',
+              showCancelButton: true,
+              confirmButtonColor: '#bc3d4f',
+              confirmButtonText: 'Confirm delete!',
+              confirmButtonColor: '#bc3d4f',
+          })
+          .then((result) => {
+              if (result.isConfirmed) {
+                  $.ajax({
+                      url: '{{ route('delete') }}',
+                      method: 'delete',
+                      data: {
+                          id: id,
+                          _token: csrf
+                      },
+                      success: function(response) {
+                          console.log(response);
+                          allproduct();
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Deleted Successfully.',
+                              showConfirmButton: false,
+                              timer: 1700,
+                              // timerProgressBar: true,
+                              // toast: true,
+                              // position: 'top',
+                              // iconColor: 'white',
+                              // customClass: {
+                              //     popup: 'colored-toast'
+                              // },
+                          })
+                      }
+                  });
+              }
+          })
+      });
+
+
+       //Getting all the data from the id choose
+       $(document).on('click', '.view_product', function(e) {
+          e.preventDefault();
+          let id = $(this).attr('id');
+          $.ajax({
+              url: '{{ route('view_product') }}',
+              method: 'get',
+              data: {
+                  id: id,
+                  _token: '{{ csrf_token() }}'
+              },
+
+              success: function(response){
+
+                  var product_price = response.price;
+                  var product_stock = response.available_inventory;
+                  var total = (product_price * product_stock).toFixed(2);
+
+                  $("#view_product_id").val(response.id);
+                  $("#view_name").val(response.name);
+                  $("#view_unit").val(response.unit);
+                  $("#view_price").val(response.price);
+                  $("#view_available_inventory").val(response.available_inventory);
+                  $("#view_available_inventory_cost").val(total);
+                  $("#view_expiration_date").val(response.expiration_date);
+                  $("#view_image").html( `<img src="storage/product/images/${response.image}" class="img-fluid img-thumbnail" ">`);   
+
+                  
+              }
           });
+      });
+      
 
       
   });
